@@ -7,7 +7,7 @@ import Image from 'next/image';
 
 const About = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.1 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
     <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">

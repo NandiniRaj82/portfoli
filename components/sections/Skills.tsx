@@ -1,12 +1,12 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 
 const Skills = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.1 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   const skills = [
     // Frontend Technologies
@@ -23,7 +23,7 @@ const Skills = () => {
     { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', category: 'Language' },
     { name: 'PHP', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg', category: 'Language' },
     { name: 'C++', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg', category: 'Language' },
-    { name: 'C++', icon: 'https://pngimg.com/uploads/letter_c/letter_c_PNG22.png', category: 'Language' },
+    { name: 'C', icon: 'https://pngimg.com/uploads/letter_c/letter_c_PNG22.png', category: 'Language' },
     { name: 'Express', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg', category: 'Backend' },
     { name: 'FastAPI', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg', category: 'Backend' },
     { name: 'Flask', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg', category: 'Backend' },
@@ -45,12 +45,13 @@ const Skills = () => {
     { name: 'Postman', icon: 'https://creazilla-store.fra1.digitaloceanspaces.com/icons/3254217/postman-icon-md.png', category: 'Tool' },
     { name: 'Tina CMS', icon: 'https://cdn.sanity.io/images/34ent8ly/production/1330251f1f394732038eb0e688693665665960ed-824x824.png', category: 'Tool' },
     { name: 'Docusaurus', icon: 'https://cdn.faun.dev/prod/media/public/cache/f9f62e2758bc297d0243e1dc23147ad2/docusaurus.png', category: 'Tool' },
-
-
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0, y: 100 },
+  const containerVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      y: 100 
+    },
     visible: {
       opacity: 1,
       y: 0,
@@ -61,8 +62,11 @@ const Skills = () => {
     }
   };
 
-  const skillVariants = {
-    hidden: { opacity: 0, scale: 0 },
+  const skillVariants: Variants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0 
+    },
     visible: {
       opacity: 1,
       scale: 1,
@@ -132,7 +136,7 @@ const Skills = () => {
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-6 md:gap-8">
                 {skills.map((skill, index) => (
                   <motion.div
-                    key={skill.name}
+                    key={`${skill.name}-${index}`}
                     variants={skillVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
@@ -152,7 +156,8 @@ const Skills = () => {
                           alt={skill.name}
                           className="w-6 h-6 md:w-8 md:h-8 group-hover:scale-110 transition-transform duration-300 mb-1"
                           onError={(e) => {
-                            e.target.style.display = 'none';
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
                           }}
                         />
                         {/* Fallback Icon */}

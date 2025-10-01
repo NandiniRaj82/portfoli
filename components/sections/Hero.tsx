@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FiGithub, FiLinkedin, FiMail, FiDownload, FiArrowDown, FiCode, FiZap, FiStar, FiPlay, FiExternalLink } from 'react-icons/fi';
 
-const TypingAnimation = ({ texts, className = '' }) => {
+const TypingAnimation = ({ texts, className = '' }: { texts: string[], className?: string }) => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -36,7 +36,7 @@ const TypingAnimation = ({ texts, className = '' }) => {
   );
 };
 
-const ParallaxOrb = ({ size, color, left, top, delay }) => (
+const ParallaxOrb = ({ size, color, left, top, delay }: { size: string, color: string, left: string, top: string, delay: number }) => (
   <div
     className={`absolute rounded-full blur-xl opacity-20 animate-float-slow`}
     style={{
@@ -50,7 +50,7 @@ const ParallaxOrb = ({ size, color, left, top, delay }) => (
   />
 );
 
-const CodeSnippet = ({ children, className = "" }) => (
+const CodeSnippet = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => (
   <div className={`font-mono text-sm bg-gray-900/50 border border-cyan-500/20 rounded-lg p-3 backdrop-blur-sm ${className}`}>
     <div className="flex items-center gap-2 mb-2">
       <div className="w-3 h-3 rounded-full bg-red-400"></div>
@@ -61,7 +61,7 @@ const CodeSnippet = ({ children, className = "" }) => (
   </div>
 );
 
-const StatsCard = ({ number, label, icon: Icon }) => (
+const StatsCard = ({ number, label, icon: Icon }: { number: string, label: string, icon: React.ElementType }) => (
   <div className="bg-gray-900/40 backdrop-blur-md border border-cyan-500/20 rounded-2xl p-6 text-center transform hover:scale-105 transition-all duration-300 hover:border-cyan-400/40 hover:shadow-lg hover:shadow-cyan-500/10">
     <Icon className="w-8 h-8 text-cyan-400 mx-auto mb-3" />
     <div className="text-3xl font-bold text-white mb-2">{number}</div>
@@ -113,9 +113,9 @@ const Hero = () => {
   useEffect(() => {
     setIsVisible(true);
     
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent) => {
       if (heroRef.current) {
-        const rect = heroRef.current.getBoundingClientRect();
+        const rect = (heroRef.current as HTMLElement).getBoundingClientRect();
         setMousePosition({ 
           x: ((e.clientX - rect.left) / rect.width) * 100,
           y: ((e.clientY - rect.top) / rect.height) * 100
@@ -127,7 +127,7 @@ const Hero = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     document.querySelector(sectionId)?.scrollIntoView({ behavior: 'smooth' });
   };
 

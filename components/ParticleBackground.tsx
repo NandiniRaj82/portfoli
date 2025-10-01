@@ -17,8 +17,7 @@ const ParticleBackground = () => {
   return (
     <Particles
       id="tsparticles"
-      init={particlesInit}
-      loaded={particlesLoaded}
+      particlesLoaded={particlesLoaded}
       options={{
         background: {
           color: {
@@ -37,8 +36,8 @@ const ParticleBackground = () => {
               mode: "repulse",
             },
             resize: {
-  delay: 0, // optional, default is 0
-},
+              delay: 0,
+            },
           },
           modes: {
             push: {
@@ -76,14 +75,17 @@ const ParticleBackground = () => {
             straight: false,
             attract: {
               enable: true,
-              rotateX: 600,
-              rotateY: 1200,
+              rotate: {
+                x: 600,
+                y: 1200,
+              },
             },
           },
           number: {
             density: {
               enable: true,
-              area: 600,
+              width: 600,
+              height: 600,
             },
             value: 120,
           },
@@ -92,7 +94,6 @@ const ParticleBackground = () => {
             animation: {
               enable: true,
               speed: 1,
-              minimumValue: 0.1,
               sync: false,
             },
           },
@@ -108,8 +109,7 @@ const ParticleBackground = () => {
             value: { min: 1, max: 4 },
             animation: {
               enable: true,
-              speed: 2,
-              minimumValue: 0.5,
+              speed: 1,
               sync: false,
             },
           },
