@@ -29,18 +29,16 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Replace these with your EmailJS credentials
       await emailjs.send(
-        'YOUR_SERVICE_ID',
-        'YOUR_TEMPLATE_ID',
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          message: formData.message,
-          to_email: 'nandiniraj175@gmail.com'
-        },
-        'YOUR_PUBLIC_KEY'
-      );
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+      },
+      process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+    );
       
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
